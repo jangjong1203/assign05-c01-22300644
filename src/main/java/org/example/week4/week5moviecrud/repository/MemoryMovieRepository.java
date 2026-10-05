@@ -2,26 +2,37 @@ package org.example.week4.week5moviecrud.repository;
 
 import org.example.week4.week5moviecrud.domain.Movie;
 
-import java.util.List;
+import java.util.*;
 
 public class MemoryMovieRepository implements MovieRepository{
+    Map<Long,Movie> store=new LinkedHashMap<>();
+    Long id=0L;
+
     @Override
     public Movie save(Movie movie) {
-        return null;
+        movie.setId(++id);
+        store.put(movie.getId(),movie);
+        return movie;
     }
 
     @Override
     public List<Movie> findAll() {
-        return List.of();
+        return new ArrayList<>(store.values());
     }
 
     @Override
-    public Movie update(Movie m) {
-        return null;
+    public Optional<Movie> findById() {
+        return Optional.ofNullable(store.get(id));
+    }
+
+    @Override
+    public Movie update(Movie newm) {
+        store.put(newm.getId(),newm);
+        return newm;
     }
 
     @Override
     public void deleteById(long m) {
-
+        store.remove(id);
     }
 }

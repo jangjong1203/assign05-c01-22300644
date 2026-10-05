@@ -2,11 +2,20 @@ package org.example.week4.week5moviecrud.domain;
 
 
 public class Movie {
+    long Id;
     String title;
     String director;
     String genre;
     int year;
     float rating;
+
+    public long getId() {
+        return Id;
+    }
+
+    public void setId(long id) {
+        Id = id;
+    }
 
     public String getTitle() {
         return title;
