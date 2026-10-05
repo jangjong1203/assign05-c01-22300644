@@ -1,9 +1,12 @@
 package org.example.week4.week5moviecrud.repository;
 
 import org.example.week4.week5moviecrud.domain.Movie;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+
+@Repository
 public class MemoryMovieRepository implements MovieRepository{
     Map<Long,Movie> store=new LinkedHashMap<>();
     Long id=0L;
