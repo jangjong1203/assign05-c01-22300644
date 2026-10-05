@@ -3,7 +3,9 @@ package org.example.week4.week5moviecrud.controller;
 import org.example.week4.week5moviecrud.dto.MovieRequest;
 import org.example.week4.week5moviecrud.dto.MovieResponse;
 import org.example.week4.week5moviecrud.service.MovieService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -18,6 +20,18 @@ public class MovieController {
 
     @PostMapping
     public MovieResponse Post(@RequestBody MovieRequest request){
+        if(request.title()==null||request.title().trim().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"title is empty");
+        }else if(request.director()==null||request.director().trim().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "director is empty");
+        }else if(request.genre()==null||request.genre().trim().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"genre is empty");
+        }
+        if(request.year()<0||request.year()>2026){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"year is wrong(input:0~2026)");
+        } else if(request.rating()<0||request.rating()>10){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"rating is wrong(input:0.0~10.0)");
+        }
         return movieService.Create(request);
     }
 
@@ -32,6 +46,18 @@ public class MovieController {
 
     @PutMapping("/{id}")
     public MovieResponse Put(@PathVariable long id,@RequestBody MovieRequest request){
+        if(request.title()==null||request.title().trim().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"title is empty");
+        }else if(request.director()==null||request.director().trim().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "director is empty");
+        }else if(request.genre()==null||request.genre().trim().isEmpty()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"genre is empty");
+        }
+        if(request.year()<0||request.year()>2026){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"year is wrong(input:0~2026)");
+        } else if(request.rating()<0||request.rating()>10){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"rating is wrong(input:0.0~10.0)");
+        }
         return movieService.Update(id,request);
     }
 
