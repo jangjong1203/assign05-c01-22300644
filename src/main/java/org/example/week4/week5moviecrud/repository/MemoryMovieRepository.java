@@ -21,7 +21,7 @@ public class MemoryMovieRepository implements MovieRepository{
     }
 
     @Override
-    public Optional<Movie> findById() {
+    public Optional<Movie> findById(long id) {
         return Optional.ofNullable(store.get(id));
     }
 
@@ -32,7 +32,7 @@ public class MemoryMovieRepository implements MovieRepository{
     }
 
     @Override
-    public void deleteById(long m) {
+    public void deleteById(long id) {
         store.remove(id);
     }
 }

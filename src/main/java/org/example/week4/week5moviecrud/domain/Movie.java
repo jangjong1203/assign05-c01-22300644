@@ -9,6 +9,15 @@ public class Movie {
     int year;
     float rating;
 
+    public Movie(long id, String title, String director, String genre, int year, float rating) {
+        Id = id;
+        this.title = title;
+        this.director = director;
+        this.genre = genre;
+        this.year = year;
+        this.rating = rating;
+    }
+
     public long getId() {
         return Id;
     }

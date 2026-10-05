@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface MovieRepository {
      Movie save(Movie movie);
      List<Movie> findAll();
-     Optional<Movie> findById();
+     Optional<Movie> findById(long id);
      Movie update(Movie m);
      void deleteById(long m);
 }
