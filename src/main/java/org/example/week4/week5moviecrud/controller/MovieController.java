@@ -71,4 +71,5 @@ public class MovieController {
         return movieService.ratingCut(minR);
     }
 
+
 }
