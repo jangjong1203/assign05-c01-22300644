@@ -7,7 +7,9 @@ import org.example.week4.week5moviecrud.domain.Movie;
 import org.example.week4.week5moviecrud.dto.MovieRequest;
 import org.example.week4.week5moviecrud.dto.MovieResponse;
 import org.example.week4.week5moviecrud.repository.MovieRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -28,19 +30,27 @@ public class MovieService {
         }
 
     public MovieResponse findById(long id){
-
+        Movie m=repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Movie not found: "+id));
+        return toResponse(m);
     }
 
-    public MovieResponse Upadte(long id, MovieRequest m){
-
+    public MovieResponse Update(long id, MovieRequest m){
+        Movie fM=repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Movie not found: "+id));
+        fM.setTitle(m.title());
+        fM.setDirector(m.director());
+        fM.setGenre(m.genre());
+        fM.setYear(m.year());
+        fM.setRating(m.rating());
+        return toResponse(repository.update(fM));
     }
 
-    public MovieResponse DelleteById(long id){
-
+    public void DeleteById(long id){
+        repository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Movie not found: "+id));
+        repository.deleteById(id);
     }
 
         private MovieResponse toResponse(Movie m){
-                return new MovieResponse(null,m.getTitle(),m.getDirector(),m.getGenre(),m.getYear(),m.getRating());
+                return new MovieResponse(m.getId(),m.getTitle(),m.getDirector(),m.getGenre(),m.getYear(),m.getRating());
         }
 
 
