@@ -35,4 +35,16 @@ public class MemoryMovieRepository implements MovieRepository{
     public void deleteById(long id) {
         store.remove(id);
     }
+
+
+    public List<Movie> ratingCut(float minR){
+        List<Movie> ratingMovie=new ArrayList<>();
+        for(Movie movie : store.values()){
+            if(movie.getRating()>=minR){
+                ratingMovie.add(movie);
+            }
+        }
+
+        return ratingMovie;
+    }
 }

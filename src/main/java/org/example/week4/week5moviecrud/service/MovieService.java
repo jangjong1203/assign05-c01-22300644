@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,6 +54,15 @@ public class MovieService {
                 return new MovieResponse(m.getId(),m.getTitle(),m.getDirector(),m.getGenre(),m.getYear(),m.getRating());
         }
 
+
+        public List<MovieResponse> ratingCut(float minR){
+            List<MovieResponse> ResponseM=new ArrayList<>();
+            List<Movie> ratingMovie=repository.ratingCut(minR);
+            for(Movie movie : ratingMovie){
+                    ResponseM.add(toResponse(movie));
+            }
+            return ResponseM;
+        }
 
 
 }

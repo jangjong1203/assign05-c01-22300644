@@ -66,4 +66,9 @@ public class MovieController {
         movieService.DeleteById(id);
     }
 
+    @GetMapping("/rating/{minR}")
+    public List<MovieResponse> Rating(@PathVariable float minR){
+        return movieService.ratingCut(minR);
+    }
+
 }
