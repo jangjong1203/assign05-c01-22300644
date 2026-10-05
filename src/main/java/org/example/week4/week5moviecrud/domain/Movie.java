@@ -1,18 +1,12 @@
 package org.example.week4.week5moviecrud.domain;
 
+
 public class Movie {
-    long id;
     String title;
     String director;
     String genre;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    int year;
+    float rating;
 
     public String getTitle() {
         return title;
@@ -36,5 +30,21 @@ public class Movie {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }
